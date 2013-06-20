@@ -1,6 +1,10 @@
 #include <PlatformTools.h>
 #include <iostream>
 
+//Platform macros:
+//http://stackoverflow.com/questions/142508/how-do-i-check-os-with-a-preprocessor-directive
+//http://sourceforge.net/p/predef/wiki/OperatingSystems/
+
 #ifdef _WIN32
 //define something for Windows
 #else
