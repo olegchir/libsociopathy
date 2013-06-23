@@ -1,13 +1,18 @@
 cmake_minimum_required(VERSION 2.8)
 project(libsociopathy)
-
 add_definitions(-DLIBSOCIOPATHY_LIBRARY)
+
+#enable C++x11
+add_definitions(-std=c++11)
+list( APPEND CMAKE_CXX_FLAGS "-std=c++11x ${CMAKE_CXX_FLAGS} -g -ftest-coverage -fprofile-arcs")
+
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 set(EXECUTABLE_NAME tester)
 set(LIBRARY_NAME    libsociopathy)
 
+#apply platform-specific flags
 if (UNIX)
   message(status "Setting GCC flags")
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fexceptions -g -Wall")
@@ -16,6 +21,7 @@ else()
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /EHc-")
 endif()
 
+#link against Boost library
 #http://cpprocks.com/using-cmake-to-build-a-cross-platform-project-with-a-boost-dependency/
 add_definitions(-DBOOST_ALL_DYN_LINK)
 #add_definitions(-DBOOST_ALL_NO_LIB)
@@ -71,5 +77,6 @@ target_link_libraries(
     ${Boost_LIBRARIES}
 )
 
+#link against Qt5
 find_package(Qt5Core REQUIRED)
 qt5_use_modules(${LIBRARY_NAME} Core)
