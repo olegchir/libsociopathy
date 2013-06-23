@@ -8,11 +8,20 @@ namespace BoostProgramOptions = boost::program_options;
 class LSCSettings
 {
 public:
-    static void writeSettings(std::string name, std::string value );
-    static void readSettings( BoostProgramOptions::options_description& desc, BoostProgramOptions::variables_map& vm );    
+    //    const std::vector<std::string> RECOGNIZED_SETTINGS_NAMES {
+    //        "name","name2"
+    //    };
+
     static std::string getSettingsFilePath();
-    static BoostProgramOptions::options_description getOptionDescription();
-    static std::string getStringOption(std::string optionName);
-    static string getStringOptionWithSchema(std::string optionName);
-    static string getStringOptionWithoutSchema(std::string optionName);
+    static void writeSettings(std::map<std::string,std::string> settingsMap);
+    static void writeString(std::string optionName, std::string optionValue, std::map<std::string,std::string> settingsMap);
+    static void writeString(std::string optionName, std::string optionValue);
+    static void readSettings(BoostProgramOptions::options_description& desc, BoostProgramOptions::variables_map& vm);
+    static void readSettings(BoostProgramOptions::options_description& desc, BoostProgramOptions::variables_map& vm , bool allowUnregistered);
+    static BoostProgramOptions::options_description getSettingsSemantics();
+    static std::string getString(std::string optionName);
+    static std::string getStringWithSchema(std::string optionName);
+    static std::string getStringWithoutSchema(std::string optionName);
+    static std::vector<std::string> getSettingsNames();
+    static std::map<std::string,std::string> getSettingsMap();
 };

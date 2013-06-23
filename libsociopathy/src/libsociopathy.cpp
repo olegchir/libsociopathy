@@ -14,17 +14,9 @@ Libsociopathy::Libsociopathy()
     std::cout << "CONSTRUCTOR STARTED" << std::endl;
     std::cout << "USER HOME: " << LSCPlatformTools::getUserHomeDir() << std::endl;
 
+    LSCSettings::writeString("name","testN");
 
-    // Write, read, and print settings.
-    LSCSettings::writeSettings( "name","test" );
-    std::cout << "name = " << LSCSettings::getStringOption("name") << std::endl;
-
-    // Write, read, and print newer settings.
-    LSCSettings::writeSettings( "name","another test" );
-    std::cout << "name = " << LSCSettings::getStringOption("name") << std::endl;
-
-    LSCSettings::writeSettings( "name2","another test" );
-    std::cout << "name = " << LSCSettings::getStringOption("name") << std::endl;
+     std::cout << "CONTRUCTOR STOPPED";
 }
 
 
