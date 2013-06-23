@@ -1,5 +1,8 @@
-#include <PlatformTools.h>
+#define _CRT_SECURE_NO_WARNINGS
+
 #include <iostream>
+
+#include <LSCPlatformTools.h>
 
 //Platform macros:
 //http://stackoverflow.com/questions/142508/how-do-i-check-os-with-a-preprocessor-directive
@@ -13,7 +16,7 @@
 #include <pwd.h>
 #endif
 
-string PlatformTools::getUserHomeDir() {
+string LSCPlatformTools::getUserHomeDir() {
 #ifdef _WIN32
     char* userProfile = getenv("USERPROFILE");
     if (NULL!=userProfile) {
@@ -55,7 +58,11 @@ string PlatformTools::getUserHomeDir() {
 #endif
 }
 
-bool PlatformTools::isWindows() {
+bool LSCPlatformTools::isWindows() {
+    return isWindows_Static();
+}
+
+bool LSCPlatformTools::isWindows_Dynamic() {
     char* winDir = getenv("windir");
     if (NULL==winDir) {
         return false;
@@ -63,3 +70,13 @@ bool PlatformTools::isWindows() {
         return true;
     }
 }
+
+bool LSCPlatformTools::isWindows_Static() {
+#ifdef _WIN32
+    return true;
+#else
+    return false;
+#endif
+}
+
+#undef _CRT_SECURE_NO_WARNINGS
