@@ -1,7 +1,7 @@
 #include <iostream>
 #include <exception>
 
-#include "LSCLang.h";
+#include "LSCLang.h"
 
 void LSCLang::printException(const std::exception &ex)
 {

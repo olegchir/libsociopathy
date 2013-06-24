@@ -24,7 +24,7 @@ MESSAGE( STATUS "Module path set to: ${CMAKE_MODULE_PATH}" )
 
 #prefer dynamic libraries (CMAKE_FIND_LIBRARY_SUFFIXES is a priority list)
 IF(WIN32)
-    SET(CMAKE_FIND_LIBRARY_SUFFIXES .dll .lib .a ${CMAKE_FIND_LIBRARY_SUFFIXES})
+    SET(CMAKE_FIND_LIBRARY_SUFFIXES .lib .a ${CMAKE_FIND_LIBRARY_SUFFIXES})
 ELSE(WIN32)
     SET(CMAKE_FIND_LIBRARY_SUFFIXES .so .a ${CMAKE_FIND_LIBRARY_SUFFIXES})
 ENDIF(WIN32)
@@ -36,14 +36,14 @@ set(LIBRARY_NAME    libsociopathy)
 #http://cpprocks.com/using-cmake-to-build-a-cross-platform-project-with-a-boost-dependency/
 add_definitions(-DBOOST_ALL_DYN_LINK)
 #add_definitions(-DBOOST_ALL_NO_LIB)
-find_package(Boost COMPONENTS program_options REQUIRED)
-message(status "** Boost Include: ${Boost_INCLUDE_DIR}")
-message(status "** Boost Libraries: ${Boost_LIBRARY_DIRS}")
-message(status "** Boost Libraries: ${Boost_LIBRARIES}")
 set(Boost_USE_STATIC_LIBS        OFF)
 set(Boost_USE_MULTITHREADED      ON)
 set(Boost_USE_STATIC_RUNTIME     OFF)
 set(BOOST_ALL_DYN_LINK           ON)
+find_package(Boost COMPONENTS program_options REQUIRED)
+message(status "** Boost Include: ${Boost_INCLUDE_DIR}")
+message(status "** Boost Libraries: ${Boost_LIBRARY_DIRS}")
+message(status "** Boost Libraries: ${Boost_LIBRARIES}")
 
 find_package(Sqlite3 REQUIRED)
 
@@ -87,7 +87,7 @@ add_executable(
 
 target_link_libraries(
     ${EXECUTABLE_NAME}
-    ${LIBRARY_NAME}
+    ${LIBRARY_NAME}    
     ${Boost_LIBRARIES}
     ${SQLITE3_LIBRARIES}
 )
