@@ -58,7 +58,7 @@ include_directories(
 link_directories(
     ${CMAKE_CURRENT_SOURCE_DIR}/lib/
     ${Boost_LIBRARY_DIRS}
-    ${SQLITE3_LIBRARIES}
+    ${SQLITE3_LIBRARY_DIR}
 )
 
 file(
