@@ -9,10 +9,10 @@ list( APPEND CMAKE_CXX_FLAGS "-std=c++11 ${CMAKE_CXX_FLAGS} -g -ftest-coverage -
 #apply platform-specific flags
 if (UNIX)
   message(status "Setting GCC flags")
-  set(APPEND CMAKE_CXX_FLAGS "-fexceptions -g -Wall")
+  list(APPEND CMAKE_CXX_FLAGS " -fexceptions -g -Wall")
 else()
   message(status "Setting MSVC flags")
-  set(APPEND CMAKE_CXX_FLAGS "/EHc-")
+  list(APPEND CMAKE_CXX_FLAGS " /EHc-")
 endif()
 
 set(CMAKE_AUTOMOC ON)
