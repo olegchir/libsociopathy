@@ -4,22 +4,22 @@ add_definitions(-DLIBSOCIOPATHY_LIBRARY)
 
 #enable C++x11
 add_definitions(-std=c++11)
-list( APPEND CMAKE_CXX_FLAGS "-std=c++11x ${CMAKE_CXX_FLAGS} -g -ftest-coverage -fprofile-arcs")
+list( APPEND CMAKE_CXX_FLAGS "-std=c++11 ${CMAKE_CXX_FLAGS} -g -ftest-coverage -fprofile-arcs")
+
+#apply platform-specific flags
+if (UNIX)
+  message(status "Setting GCC flags")
+  set(APPEND CMAKE_CXX_FLAGS "-fexceptions -g -Wall")
+else()
+  message(status "Setting MSVC flags")
+  set(APPEND CMAKE_CXX_FLAGS "/EHc-")
+endif()
 
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 set(EXECUTABLE_NAME tester)
 set(LIBRARY_NAME    libsociopathy)
-
-#apply platform-specific flags
-if (UNIX)
-  message(status "Setting GCC flags")
-  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fexceptions -g -Wall")
-else()
-  message(status "Setting MSVC flags")
-  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /EHc-")
-endif()
 
 #link against Boost library
 #http://cpprocks.com/using-cmake-to-build-a-cross-platform-project-with-a-boost-dependency/
