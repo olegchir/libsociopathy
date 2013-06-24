@@ -92,6 +92,12 @@ target_link_libraries(
     ${SQLITE3_LIBRARIES}
 )
 
+target_link_libraries(
+    ${LIBRARY_NAME}
+    ${Boost_LIBRARIES}
+    ${SQLITE3_LIBRARIES}
+)
+
 #link against Qt5
 find_package(Qt5Core REQUIRED)
 qt5_use_modules(${LIBRARY_NAME} Core)
