@@ -18,6 +18,9 @@ endif()
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
+SET(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/CMakeModules")
+MESSAGE( STATUS "Module path set to: ${CMAKE_MODULE_PATH}" )
+
 set(EXECUTABLE_NAME tester)
 set(LIBRARY_NAME    libsociopathy)
 
@@ -34,17 +37,20 @@ set(Boost_USE_MULTITHREADED      ON)
 set(Boost_USE_STATIC_RUNTIME     OFF)
 set(BOOST_ALL_DYN_LINK           ON)
 
+find_package(Sqlite3 REQUIRED)
 
 #set(EXECUTABLE_OUTPUT_PATH ${CMAKE_}/bin/)
 
 include_directories(
     ${CMAKE_CURRENT_SOURCE_DIR}/include/
     ${Boost_INCLUDE_DIR}
+    ${SQLITE3_INCLUDE_DIR}
 )
 
 link_directories(
     ${CMAKE_CURRENT_SOURCE_DIR}/lib/
     ${Boost_LIBRARY_DIRS}
+    ${SQLITE3_LIBRARIES}
 )
 
 file(
@@ -75,6 +81,7 @@ target_link_libraries(
     ${EXECUTABLE_NAME}
     ${LIBRARY_NAME}
     ${Boost_LIBRARIES}
+    ${SQLITE3_LIBRARIES}
 )
 
 #link against Qt5
