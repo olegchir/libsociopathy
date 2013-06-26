@@ -5,10 +5,14 @@
 #include <string>
 #include "libsociopathy_global.h"
 
+#include <LSCBackend.h>
+
 class LIBSOCIOPATHYSHARED_EXPORT Libsociopathy
-{    
+{   
+	LSCBackend* backend;
 public:
     Libsociopathy();
+	~Libsociopathy();
 };
 
 #endif // LIBSOCIOPATHY_H

@@ -7,23 +7,31 @@
 #include "LSCPlatformTools.h"
 #include "LSCSettings.h"
 
+#include "LSCBackendSQLite.h"
+#include "LSCBackend.h"
 
 #include "libsociopathy.h"
+
 
 Libsociopathy::Libsociopathy()
 {    
 	std::cout << "CONSTRUCTOR STARTED" << std::endl;
 	std::cout << "USER HOME: " << LSCPlatformTools::getUserHomeDir() << std::endl;
 
+	backend = NULL;
+
 	map<string,string> settingsMap = LSCSettings::getSettingsMap();
 	string backendType = settingsMap["backendType"];
-	if (0==backendType.compare("sqlite")) {
-
-	} 
-	else if (backendType.empty()) {
-		settingsMap["backendType"] = "sqlite";
+	
+	if (backendType.empty()) {
+		settingsMap["backendType"] = backendType = "sqlite";
 		LSCSettings::writeSettings(settingsMap);
-	} else {
+	} 
+
+	if (0==backendType.compare("sqlite")) {
+		backend = new LSCBackendSQLite();
+	} 
+	else {
 		std::cout << "Unknown backend" << std::endl;
 		return;
 	}
@@ -34,22 +42,18 @@ Libsociopathy::Libsociopathy()
 	} catch (...) {
 		std::cout << "Can't create config dir" << std::endl;
 		return;
-	}
+	}	
 
-	//const char* SQL = "CREATE TABLE IF NOT EXISTS foo(a,b,c); INSERT INTO FOO VALUES(1,2,3); INSERT INTO FOO SELECT * FROM FOO;";
-
-
-	//char *err = 0;
-
-	//else if (sqlite3_exec(db, SQL, 0, 0, &err))
-	//{
-	//	fprintf(stderr, "Error SQL: %sn", err);
-	//	sqlite3_free(err);
-	//}
-
-	//sqlite3_close(db);
+    
+	backend->test();
+	
 
 	std::cout << "CONTRUCTOR STOPPED";
+}
+
+Libsociopathy::~Libsociopathy()
+{
+	delete backend;
 }
 
 

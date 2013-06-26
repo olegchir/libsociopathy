@@ -1,5 +1,6 @@
 #include <iostream>
 #include <exception>
+#include <string>
 
 #include "LSCLang.h"
 
@@ -12,3 +13,4 @@ std::string LSCLang::getExceptionMessage(const std::exception &ex)
 {
     return std::string(ex.what()) + " (" + std::string(typeid(ex).name()) + std::string(")\n");
 }
+
