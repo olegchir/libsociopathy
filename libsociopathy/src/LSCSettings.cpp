@@ -54,10 +54,7 @@ void LSCSettings::readSettings( BoostProgramOptions::options_description& desc, 
 
 
 string LSCSettings::getSettingsFilePath() {
-    string fileName ("libsociopathy.ini");
-    string homeDir = LSCPlatformTools::getUserHomeDir();
-    string filePath (homeDir + FILE_SEPARATOR + fileName);
-    return filePath;
+    return LSCPlatformTools::ensureConfigDir() + FILE_SEPARATOR + string("libsociopathy.ini");       
 }
 
 string LSCSettings::getString(std::string optionName)
@@ -87,8 +84,7 @@ string LSCSettings::getStringWithoutSchema(std::string optionName)
 std::vector<string> LSCSettings::getSettingsNames()
 {
     std::vector<std::string> optionNames;
-    optionNames.push_back("name");
-    optionNames.push_back("name2");
+    optionNames.push_back("backendType");
 
     //  return RECOGNIZED_OPTION_NAMES;
     return optionNames;

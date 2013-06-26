@@ -1,6 +1,8 @@
 #define _CRT_SECURE_NO_WARNINGS
 
 #include <iostream>
+#include <exception>
+#include <boost/filesystem.hpp>
 
 #include <LSCPlatformTools.h>
 
@@ -77,6 +79,27 @@ bool LSCPlatformTools::isWindows_Static() {
 #else
     return false;
 #endif
+}
+
+std::string LSCPlatformTools::getConfigDir()
+{
+	return getUserHomeDir() + FILE_SEPARATOR + string(".config") + FILE_SEPARATOR + string("libsociopathy");
+}
+
+std::string LSCPlatformTools::ensureConfigDir()
+{
+	string configDir = getConfigDir();
+	
+	bool result = true;
+	if (!boost::filesystem::exists(configDir)) {
+		result = boost::filesystem::create_directories(configDir);
+	}
+	
+	if (!result) {
+		throw runtime_error("can't create config dir");
+	} 
+
+	return configDir;
 }
 
 #undef _CRT_SECURE_NO_WARNINGS

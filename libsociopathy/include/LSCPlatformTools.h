@@ -14,6 +14,8 @@ class LSCPlatformTools
 {
 public:
     static string getUserHomeDir();
+	static string getConfigDir();
+	static string ensureConfigDir();
     static bool isWindows();
     static bool isWindows_Dynamic();
     static bool isWindows_Static();
